@@ -1,0 +1,3 @@
+[whatsapp]
+phone=<phone, e.g. 4930112>
+pass=<password, retrieved by yowsup-cli>

@@ -13,14 +13,7 @@ from yowsup.stacks import YowStack, YOWSUP_CORE_LAYERS
 from yowsup import env
 from yowsup.layers.axolotl import YowAxolotlLayer
 from palayer import PictureArchiverLayer
-import ConfigParser
-
-config = ConfigParser.ConfigParser()
-config.read('config')
-phone = config.get("whatsapp", "phone")
-password = config.get("whatsapp" ,"pass")
-
-CREDENTIALS = (phone, password)
+from config import CREDENTIALS
 
 if __name__==  "__main__":
     layers = (

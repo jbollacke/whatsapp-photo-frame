@@ -1,4 +1,3 @@
-from yowsup.structs import ProtocolTreeNode
 from yowsup.layers.protocol_media.mediadownloader import MediaDownloader
 from yowsup.layers.interface import YowInterfaceLayer, ProtocolEntityCallback
 from yowsup.layers.protocol_messages.protocolentities import TextMessageProtocolEntity

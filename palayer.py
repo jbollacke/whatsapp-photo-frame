@@ -8,7 +8,6 @@ class PictureArchiverLayer(YowInterfaceLayer):
 
     @ProtocolEntityCallback("message")
     def onMessage(self, messageProtocolEntity):
-        print(messageProtocolEntity)
         if messageProtocolEntity.getType() == 'text':
             self.onTextMessage(messageProtocolEntity)
         elif messageProtocolEntity.getType() == 'media':

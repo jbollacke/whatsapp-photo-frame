@@ -1,8 +1,7 @@
 from yowsup.layers.protocol_media.mediadownloader import MediaDownloader
 from yowsup.layers.interface import YowInterfaceLayer, ProtocolEntityCallback
 from yowsup.layers.protocol_messages.protocolentities import TextMessageProtocolEntity
-import shutil, os, logging
-logger = logging.getLogger(__name__)
+import shutil, os
 
 class PictureArchiverLayer(YowInterfaceLayer):
 

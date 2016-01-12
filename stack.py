@@ -1,4 +1,3 @@
-from yowsup.layers import YowParallelLayer
 from yowsup.layers.auth import YowAuthenticationProtocolLayer
 from yowsup.layers.protocol_messages import YowMessagesProtocolLayer
 from yowsup.layers.protocol_receipts import YowReceiptProtocolLayer
@@ -18,7 +17,7 @@ from config import CREDENTIALS
 if __name__==  "__main__":
     layers = (
         PictureArchiverLayer,
-	YowParallelLayer(YOWSUP_PROTOCOL_LAYERS_FULL),
+	(YOWSUP_PROTOCOL_LAYERS_FULL),
 	YowAxolotlLayer
     ) + YOWSUP_CORE_LAYERS
 

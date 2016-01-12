@@ -21,9 +21,9 @@ if __name__==  "__main__":
     ) + YOWSUP_CORE_LAYERS
 
     stack = YowStack(layers)
-    stack.setProp(YowAuthenticationProtocolLayer.PROP_CREDENTIALS, CREDENTIALS)         #setting credentials
+    stack.setProp(YowAuthenticationProtocolLayer.PROP_CREDENTIALS, CREDENTIALS)
 
-    stack.broadcastEvent(YowLayerEvent(YowNetworkLayer.EVENT_STATE_CONNECT))   #sending the connect signal
+    stack.broadcastEvent(YowLayerEvent(YowNetworkLayer.EVENT_STATE_CONNECT))
 
-    stack.loop() #this is the program mainloop
+    stack.loop()
 

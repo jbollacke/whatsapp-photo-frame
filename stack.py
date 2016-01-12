@@ -5,7 +5,6 @@ from yowsup.layers.protocol_acks import YowAckProtocolLayer
 from yowsup.layers.protocol_media import YowMediaProtocolLayer
 from yowsup.layers.network import YowNetworkLayer
 from yowsup.layers.coder import YowCoderLayer
-from yowsup.stacks import YowStack
 from yowsup.common import YowConstants
 from yowsup.layers import YowLayerEvent
 from yowsup.stacks import YowStack, YOWSUP_CORE_LAYERS, YOWSUP_PROTOCOL_LAYERS_FULL

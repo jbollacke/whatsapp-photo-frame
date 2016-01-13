@@ -2,6 +2,7 @@ from yowsup.layers.protocol_media.mediadownloader import MediaDownloader
 from yowsup.layers.interface import YowInterfaceLayer, ProtocolEntityCallback
 from yowsup.layers.protocol_messages.protocolentities import TextMessageProtocolEntity
 import shutil, os
+import re
 
 class PictureArchiverLayer(YowInterfaceLayer):
 
@@ -21,7 +22,16 @@ class PictureArchiverLayer(YowInterfaceLayer):
         self.toLower(entity.ack())
 
     def onTextMessage(self,messageProtocolEntity):
-        pass
+	body = messageProtocolEntity.getBody()
+	match = re.match("^!del (.*)$", body)
+	if match:
+	    basename = os.path.basename(match.group(1))
+	    filename = "files/%s" % basename
+	    if os.path.isfile(filename):
+                os.remove(filename)
+                self.toLower(TextMessageProtocolEntity("Foto geloescht", to = messageProtocolEntity.getFrom()))
+	    else:
+	        self.toLower(TextMessageProtocolEntity("Foto nicht gefunden", to = messageProtocolEntity.getFrom()))
 
     def onMediaMessage(self, messageProtocolEntity):
         if messageProtocolEntity.getMediaType() == "image":

@@ -3,6 +3,18 @@ from yowsup.layers.interface import YowInterfaceLayer, ProtocolEntityCallback
 from yowsup.layers.protocol_messages.protocolentities import TextMessageProtocolEntity
 import shutil, os
 import re
+from glob import glob
+
+basepath = "files"
+
+def nextSequenceNumber():
+    key=lambda filename: int(os.path.basename(filename)[0:-4])
+    files=glob(os.path.join(basepath, "*.jpg"))
+    if len(files)==0:
+        return 0
+    files.sort(key=key)
+    cur_num=key(files[-1])
+    return cur_num + 1
 
 class PictureArchiverLayer(YowInterfaceLayer):
 
@@ -36,19 +48,18 @@ class PictureArchiverLayer(YowInterfaceLayer):
     def onMediaMessage(self, messageProtocolEntity):
         if messageProtocolEntity.getMediaType() == "image":
             self.tmpto = messageProtocolEntity.getFrom()
-            self.downloadMedia(messageProtocolEntity.getMediaUrl())
-
-    def downloadMedia(self, url):
-        downloader = MediaDownloader(self.onSuccess, self.onError, self.onProgress)
-        downloader.download(url)
+            data = messageProtocolEntity.getMediaContent()
+            outPath = os.path.join("files", "%d.jpg" % nextSequenceNumber())
+            f = open(outPath, 'wb')
+            f.write(data)
+            f.close()
+            self.onSuccess(outPath)
 
     def onError(self):
 	self.toLower(TextMessageProtocolEntity("Foto konnte nicht gespeichert werden", to = self.tmpto))
 
     def onSuccess(self, path):
-        outPath = "files/%s.jpg" % os.path.basename(path)
-        shutil.copyfile(path, outPath)
-        self.toLower(TextMessageProtocolEntity("Foto gespeichert (%s)" % (os.path.basename(outPath)), to = self.tmpto))
+        self.toLower(TextMessageProtocolEntity("Foto gespeichert (%s)" % (os.path.basename(path)), to = self.tmpto))
 
     def onProgress(self, progress):
 	pass

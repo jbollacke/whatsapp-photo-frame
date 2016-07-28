@@ -1,10 +1,5 @@
-from yowsup.layers.auth import YowAuthenticationProtocolLayer
 from yowsup.layers.network import YowNetworkLayer
-from yowsup.layers.coder import YowCoderLayer
-from yowsup.common import YowConstants
 from yowsup.layers import YowLayerEvent
-from yowsup.stacks import YowStack, YOWSUP_CORE_LAYERS, YOWSUP_PROTOCOL_LAYERS_FULL
-from yowsup.layers.axolotl import YowAxolotlLayer
 from yowsup.stacks import YowStackBuilder
 from palayer import PictureArchiverLayer
 from config import CREDENTIALS

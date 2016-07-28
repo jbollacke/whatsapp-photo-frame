@@ -5,19 +5,16 @@ from yowsup.common import YowConstants
 from yowsup.layers import YowLayerEvent
 from yowsup.stacks import YowStack, YOWSUP_CORE_LAYERS, YOWSUP_PROTOCOL_LAYERS_FULL
 from yowsup.layers.axolotl import YowAxolotlLayer
+from yowsup.stacks import YowStackBuilder
 from palayer import PictureArchiverLayer
 from config import CREDENTIALS
 
 if __name__==  "__main__":
-    layers = (
-        PictureArchiverLayer,
-	(YOWSUP_PROTOCOL_LAYERS_FULL),
-	YowAxolotlLayer
-    ) + YOWSUP_CORE_LAYERS
+    stackbuilder = YowStackBuilder()
 
-    stack = YowStack(layers)
-    stack.setProp(YowAuthenticationProtocolLayer.PROP_CREDENTIALS, CREDENTIALS)
+    stack = stackbuilder.pushDefaultLayers(True).push(PictureArchiverLayer).build()
 
+    stack.setCredentials(CREDENTIALS)
     stack.broadcastEvent(YowLayerEvent(YowNetworkLayer.EVENT_STATE_CONNECT))
 
     stack.loop()

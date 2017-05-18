@@ -26,7 +26,6 @@ class PictureArchiverLayer(YowInterfaceLayer):
             self.onMediaMessage(messageProtocolEntity)
 
         self.toUpper(messageProtocolEntity)
-        self.toLower(messageProtocolEntity.ack())
         self.toLower(messageProtocolEntity.ack(True))
 
     @ProtocolEntityCallback("receipt")

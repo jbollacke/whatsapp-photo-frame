@@ -33,16 +33,16 @@ class PictureArchiverLayer(YowInterfaceLayer):
         self.toLower(entity.ack())
 
     def onTextMessage(self,messageProtocolEntity):
-	body = messageProtocolEntity.getBody()
-	match = re.match("^!del (.*)$", body)
-	if match:
-	    basename = os.path.basename(match.group(1))
-	    filename = "files/%s" % basename
-	    if os.path.isfile(filename):
+        body = messageProtocolEntity.getBody()
+        match = re.match("^!del (.*)$", body)
+        if match:
+            basename = os.path.basename(match.group(1))
+            filename = "files/%s" % basename
+            if os.path.isfile(filename):
                 os.remove(filename)
                 self.toLower(TextMessageProtocolEntity("Foto geloescht", to = messageProtocolEntity.getFrom()))
-	    else:
-	        self.toLower(TextMessageProtocolEntity("Foto nicht gefunden", to = messageProtocolEntity.getFrom()))
+            else:
+                self.toLower(TextMessageProtocolEntity("Foto nicht gefunden", to = messageProtocolEntity.getFrom()))
 
     def onMediaMessage(self, messageProtocolEntity):
         if messageProtocolEntity.getMediaType() == "image":
@@ -55,11 +55,10 @@ class PictureArchiverLayer(YowInterfaceLayer):
             self.onSuccess(outPath)
 
     def onError(self):
-	self.toLower(TextMessageProtocolEntity("Foto konnte nicht gespeichert werden", to = self.tmpto))
+        self.toLower(TextMessageProtocolEntity("Foto konnte nicht gespeichert werden", to = self.tmpto))
 
     def onSuccess(self, path):
         self.toLower(TextMessageProtocolEntity("Foto gespeichert (%s)" % (os.path.basename(path)), to = self.tmpto))
 
     def onProgress(self, progress):
-	pass
-
+        pass
